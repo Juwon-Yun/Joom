@@ -4,8 +4,9 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Noom
+        title GMP
         link(rel="stylesheet", href="https://unpkg.com/mvp.css")
+        link(rel="stylesheet", href="/public/js/css/style.css")
     body 
         header 
             h1 GMP
@@ -17,10 +18,11 @@ html(lang="en")
             div#call
             div#myStream
                 video#myFace(autoplay, playsinline, width="400", height="400")
+                video#peerFace(autoplay, playsinline, width="400", height="400")
+            div#myBtn    
                 button#mute 음소거
                 button#camera 카메라 끄기
                 select#cameras
-            video#peerFace(autoplay, playsinline, width="400", height="400")
                 //- option(value="device") 카메라 목록 
         script(src="/socket.io/socket.io.js") 
         script(src="/public/js/app.js")

@@ -1,0 +1,12 @@
+#mute{
+    float: left;
+}
+#camera{
+    float: left;
+}
+#myface{
+    padding-right: 30px;
+}
+#peerFace{
+    padding-left: 30px;
+}

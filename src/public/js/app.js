@@ -2,6 +2,8 @@
 // io 메소드는 알아서 socket.io를 실행하고 있는 서버를 찾는다.
 const socket = io();
 
+//lt --port 3100 // global url 생성
+
 // WebRTC => Web Real - Time Communication (peer to peer) 
 // 비디오 오디오 텍스트가 서버로 들렸다 상대에 가지않고 곧장 간다(서버엔 signal만 보냄)
 
@@ -19,6 +21,7 @@ let muted = false;
 let cameraOff = false;
 let roomName;
 let myPeerConnection;
+let myDataChannel;
 
 async function getCameras(){
     try{
@@ -148,6 +151,9 @@ welcomeForm.addEventListener("submit", handleWelcomSubmit);
 
 // Peer A
 socket.on("welcome", async ()=> {
+    myDataChannel = myPeerConnection.createDataChannel("chat");
+    myDataChannel.addEventListener("message", console.log);
+    console.log("made data channel");
     const offer = await myPeerConnection.createOffer();
     myPeerConnection.setLocalDescription(offer);
     console.log("sent the offer");
@@ -158,6 +164,10 @@ socket.on("welcome", async ()=> {
 
 // Peer B
 socket.on("offer", async(offer) => {
+    myPeerConnection.addEventListener("datachannel", (event)=>{
+        myDataChannel = event.channel;
+        myDataChannel.addEventListener("message", console.log);
+    });
     console.log("received the offer");
     myPeerConnection.setRemoteDescription(offer);
     // offer 가 도착했지만 myPeerConnection은 아직 도착하지 않았기 때문에 에러    
