@@ -1,1 +1,1 @@
-Zoom Clone using NodeJS, WebRTC and Websockets.
+P2P, using NodeJS, WebRTC and Websockets.
